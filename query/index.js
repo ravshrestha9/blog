@@ -10,26 +10,26 @@ const posts = {}
 
 
 app.get('/posts', (req,res) => {
+    res.send(posts)
+})
+
+app.post('/events', (req, res)=> {
     const {type, data } = req.body
 
     if(type === 'PostCreated') {
         const {id, title} = data
-        post[id] = {id, title, comments:[]}
-
+        posts[id] = {id, title, comments:[]}
      }
 
      if(type === 'CommentCreated') {
-        const {id, content, postId} = data
+        const {id, content, postId, status} = data
 
         const post = posts[postId]
-        post.comments.push({id, content})
+        post.comments.push({id, content, status})
      }
 
+     console.log(posts)
      res.send({})
-})
-
-app.post('/events', (req, res)=> {
-
 })
 
 app.listen(4002, ()=> {
