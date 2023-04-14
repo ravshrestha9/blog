@@ -32,7 +32,9 @@ app.post('/posts/:id/comments', async(req, res) => {
             postId: req.params.id,
             status: 'pending'
         }
-    })
+    }).catch((err) => {
+        console.log(err.message);
+      });
 
     res.status(201).send(comments);
 });
@@ -59,7 +61,9 @@ app.post('/events', async(req,res)=> {
                 postId,
                 content
             }
-        })
+        }).catch((err) => {
+            console.log(err.message);
+          });
     }
     res.send({})
 }) 
